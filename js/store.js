@@ -96,37 +96,13 @@
 		} else {
 
 			// Assign an ID
-			updateData.id = parseInt(this.getRandomId(todos));
-
+			updateData.id =Date.now();
 
 			todos.push(updateData);
 			localStorage[this._dbName] = JSON.stringify(data);
 			callback.call(this, [updateData]);
 		}
 	};
-
-	/**
-	 * 
-	 * @param {object} todos List of existing todos
-	 * @returns 
-	 */
-	Store.prototype.getRandomId = function (todos) {
-		// Generate an ID
-		var newId = "";
-		var charset = "0123456789";
-
-		for (var i = 0; i < 6; i++) {
-			newId += charset.charAt(Math.floor(Math.random() * charset.length));
-		}
-
-		for (var i = 0; i < todos.length; i++) {
-			if (todos[i].id === newId) {
-				this.getRandomId(todos);
-			}
-		}
-
-		return newId;
-	}
 
 	/**
 	 * Will remove an item from the Store based on its ID
@@ -142,11 +118,6 @@
 		for (var i = 0; i < todos.length; i++) {
 			if (todos[i].id == id) {
 				todoId = todos[i].id;
-			}
-		}
-
-		for (var i = 0; i < todos.length; i++) {
-			if (todos[i].id == todoId) {
 				todos.splice(i, 1);
 			}
 		}
