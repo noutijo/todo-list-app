@@ -61,9 +61,9 @@ describe('controller', function () {
 	it('should show entries on start-up', function () {
 		// TODO: write test
 		let todos = {};
-		//initialiser le model avec l'oject qu'on vient de créer
+		
 		setUpModel([todos]);
-		//initialiser la vue sans paramètres
+		
 		subject.setView("");
 
 		expect(view.render).toHaveBeenCalledWith('showEntries', [todos]);
@@ -106,9 +106,11 @@ describe('controller', function () {
 			expect(model.read).toHaveBeenCalledWith({
 				completed: false
 			}, jasmine.any(Function));
+
 			expect(model.read).not.toHaveBeenCalledWith({
 				completed: true
 			}, jasmine.any(Function));
+			
 			expect(view.render).toHaveBeenCalledWith('showEntries', [todo]);
 		});
 
@@ -124,6 +126,10 @@ describe('controller', function () {
 
 			expect(model.read).toHaveBeenCalledWith({
 				completed: true
+			}, jasmine.any(Function));
+
+			expect(model.read).not.toHaveBeenCalledWith({
+				completed: false
 			}, jasmine.any(Function));
 			
 			expect(view.render).toHaveBeenCalledWith('showEntries', [todo]);
@@ -217,12 +223,13 @@ describe('controller', function () {
 			subject.setView('');
 
 			view.trigger('toggleAll', {
-				completed: true
+				completed: false
 			});
 			expect(model.update).toHaveBeenCalledWith(1998, {
-				completed: true
+				completed: false
 			}, jasmine.any(Function));
-			expect(model.update).toHaveBeenCalledWith(2021, {
+			
+			expect(model.update).not.toHaveBeenCalledWith(2021, {
 				completed: true
 			}, jasmine.any(Function));
 		});
@@ -309,6 +316,7 @@ describe('controller', function () {
 			view.trigger('itemRemove', {
 				id: 110
 			});
+
 			expect(model.remove).toHaveBeenCalledWith(110, jasmine.any(Function));
 		});
 
@@ -360,6 +368,11 @@ describe('controller', function () {
 			expect(model.read).toHaveBeenCalledWith({
 				completed: true
 			}, jasmine.any(Function));
+
+			expect(model.read).not.toHaveBeenCalledWith({
+				completed: false
+			}, jasmine.any(Function));
+
 			expect(model.remove).toHaveBeenCalledWith(42, jasmine.any(Function));
 		});
 
