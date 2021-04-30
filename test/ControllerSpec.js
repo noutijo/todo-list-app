@@ -61,10 +61,10 @@ describe('controller', function () {
 	it('should show entries on start-up', function () {
 		// TODO: write test
 		let todos = {};
-		
+
 		setUpModel([todos]);
-		
-		subject.setView("");
+
+		subject.setView("#/");
 
 		expect(view.render).toHaveBeenCalledWith('showEntries', [todos]);
 	});
@@ -94,7 +94,7 @@ describe('controller', function () {
 		});
 
 		it('should show active entries', function () {
-			// TODO: write test
+			// TODO: write
 			let todo = {
 				title: 'My todo',
 				completed: false
@@ -110,7 +110,7 @@ describe('controller', function () {
 			expect(model.read).not.toHaveBeenCalledWith({
 				completed: true
 			}, jasmine.any(Function));
-			
+
 			expect(view.render).toHaveBeenCalledWith('showEntries', [todo]);
 		});
 
@@ -131,7 +131,7 @@ describe('controller', function () {
 			expect(model.read).not.toHaveBeenCalledWith({
 				completed: false
 			}, jasmine.any(Function));
-			
+
 			expect(view.render).toHaveBeenCalledWith('showEntries', [todo]);
 		});
 	});
@@ -228,7 +228,7 @@ describe('controller', function () {
 			expect(model.update).toHaveBeenCalledWith(1998, {
 				completed: false
 			}, jasmine.any(Function));
-			
+
 			expect(model.update).not.toHaveBeenCalledWith(2021, {
 				completed: true
 			}, jasmine.any(Function));
